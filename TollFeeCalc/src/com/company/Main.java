@@ -38,7 +38,7 @@ public class Main { // Shayan + Jesper
             long diffInMinutes = intervalStart.until(date, ChronoUnit.MINUTES);
             long diffInDays = intervalStart.until(date, ChronoUnit.DAYS);
             System.out.println(date.toString());
-            if(diffInMinutes > 60 || diffInDays > 0 || intervalStart == dates[0] ) {
+            if(diffInMinutes > 60 || diffInDays > 0 || intervalStart.equals(date) ) {
                 intervalStart = date;
                 totalDayFee += getTollFeePerPassing(date);
                 System.out.println("+ " + getTollFeePerPassing(date) + " to the daily fee");
@@ -58,6 +58,7 @@ public class Main { // Shayan + Jesper
         }
         totalFee += Math.min(60,totalDayFee);
         return totalFee;
+        
     }
 
     public static int getTollFeePerPassing(LocalDateTime date) {
@@ -86,5 +87,6 @@ public class Main { // Shayan + Jesper
         TollFeeCalculator("src\\Test1.txt");
         TollFeeCalculator("src\\Test2.txt");
         TollFeeCalculator("src\\Test3.txt");
+
     }
 }
