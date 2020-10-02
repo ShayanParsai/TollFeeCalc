@@ -58,7 +58,6 @@ public class Main { // Shayan + Jesper
         }
         totalFee += Math.min(60,totalDayFee);
         return totalFee;
-        
     }
 
     public static int getTollFeePerPassing(LocalDateTime date) {
@@ -87,6 +86,5 @@ public class Main { // Shayan + Jesper
         TollFeeCalculator("src\\Test1.txt");
         TollFeeCalculator("src\\Test2.txt");
         TollFeeCalculator("src\\Test3.txt");
-
     }
 }
