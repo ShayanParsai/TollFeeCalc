@@ -1,14 +1,13 @@
 package com.company;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
-public class Main {
+public class Main { // Shayan + Jesper
 
     public static void TollFeeCalculator(String inputFile) {
 
@@ -20,35 +19,45 @@ public class Main {
                 dates[i] = LocalDateTime.parse(dateStrings[i], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             }
             System.out.println("The total fee for the input file is: " + getTotalFeeCost(dates));
+            System.out.println("\n=====NEW FILE======\n");
         } catch(IOException e) {
             System.err.println("Could not read file " + inputFile);
+            System.out.println("\n=====NEW FILE======\n");
         } catch (Exception e){
             System.err.println("The dates in the file are in a wrong format");
+            System.out.println("\n=====NEW FILE======\n");
         }
     }
 
     public static int getTotalFeeCost(LocalDateTime[] dates) {
         int totalFee = 0;
+        int totalDayFee = 0;
         LocalDateTime intervalStart = dates[0];
+
         for(LocalDateTime date: dates) {
             long diffInMinutes = intervalStart.until(date, ChronoUnit.MINUTES);
             long diffInDays = intervalStart.until(date, ChronoUnit.DAYS);
             System.out.println(date.toString());
-            if(diffInMinutes > 60 || diffInDays > 0 ) {
-                totalFee += getTollFeePerPassing(date);
+            if(diffInMinutes > 60 || diffInDays > 0 || intervalStart == dates[0] ) {
                 intervalStart = date;
-                if (getTollFeePerPassing(date) == 0){
-                    System.out.println("Free hour or day");
+                totalDayFee += getTollFeePerPassing(date);
+                System.out.println("+ " + getTollFeePerPassing(date) + " to the daily fee");
+                if (getTollFeePerPassing(date) == 0) {
+                    System.out.println("Free Hour/Day");
                 }
-                else {
-                    System.out.println("A fee of: " + getTollFeePerPassing(date)
-                            + " has been added, the new totalFee is: " + totalFee);
+                if (diffInDays > 0) {
+                    System.out.println("This is a new day, the current totalDayFee is: "+ totalDayFee);
+                    totalFee += Math.min(60,totalDayFee);
+                    totalDayFee = 0;
+                    System.out.println("The daily fee has been added to totalFee and than reset");
                 }
             } else {
                 System.out.println("You have recently passed the toll within the hour, no fee for this passage");
             }
+            System.out.println(" ");
         }
-        return Math.min(totalFee, 60);
+        totalFee += Math.min(60,totalDayFee);
+        return totalFee;
     }
 
     public static int getTollFeePerPassing(LocalDateTime date) {
@@ -72,15 +81,10 @@ public class Main {
     }
 
     public static void main(String[] args)  {
-        System.out.println("=============");
+        System.out.println("\n=====NEW FILE======\n");
 
         TollFeeCalculator("src\\Test1.txt");
-        System.out.println("=============");
-
         TollFeeCalculator("src\\Test2.txt");
-        System.out.println("=============");
-
         TollFeeCalculator("src\\Test3.txt");
-        System.out.println("=============");
     }
 }
