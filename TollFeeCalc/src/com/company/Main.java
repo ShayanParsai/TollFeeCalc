@@ -38,13 +38,13 @@ public class Main { // Shayan + Jesper
             long diffInMinutes = intervalStart.until(date, ChronoUnit.MINUTES);
             long diffInDays = intervalStart.until(date, ChronoUnit.DAYS);
             System.out.println(date.toString());
-            if(diffInMinutes > 60 || diffInDays > 0 || intervalStart.equals(date) ) {
+
+            if (getTollFeePerPassing(date) == 0) {
+                System.out.println("Free Hour/Day/Month");
+            } else if(diffInMinutes >= 60 || diffInDays > 0 || intervalStart.equals(date) || totalDayFee == 0) {
                 intervalStart = date;
                 totalDayFee += getTollFeePerPassing(date);
                 System.out.println("+ " + getTollFeePerPassing(date) + " to the daily fee");
-                if (getTollFeePerPassing(date) == 0) {
-                    System.out.println("Free Hour/Day");
-                }
                 if (diffInDays > 0) {
                     System.out.println("This is a new day, the current totalDayFee is: "+ totalDayFee);
                     totalFee += Math.min(60,totalDayFee);
