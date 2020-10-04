@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Testing Calculator")
@@ -51,8 +53,13 @@ public class MainTEST {
         for(int i = 0; i < dateArray2.length; i++) {
             dateArray2[i] = LocalDateTime.parse(dateStrings2[i], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         }
-
         assertTrue(Main.getTotalFeeCost(dateArray) > 19 && Main.getTotalFeeCost(dateArray2) > 1);
         // The test can be run on one separetly aswell, by just removing one of the conditions above
+    }
+
+    @Test
+    @DisplayName("Test if all the set times take the proper fee")
+    void TollFeeCalculator (){
+
     }
 }

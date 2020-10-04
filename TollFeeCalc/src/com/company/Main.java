@@ -1,7 +1,11 @@
 package com.company;
 
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -20,12 +24,18 @@ public class Main { // Shayan + Jesper
             }
             System.out.println("The total fee for the input file is: " + getTotalFeeCost(dates));
             System.out.println("\n=====NEW FILE======\n");
-        } catch(IOException e) {
-            System.err.println("Could not read file " + inputFile);
-            System.out.println("\n=====NEW FILE======\n");
-        } catch (Exception e){
-            System.err.println("The dates in the file are in a wrong format");
-            System.out.println("\n=====NEW FILE======\n");
+        } catch (IOException e){
+            System.err.println("Cought an IOException");
+        } catch (ArithmeticException e) {
+            System.err.println("Cought an ArithmeticException");
+        } catch (NullPointerException e) {
+            System.err.println("Cought an NullPointerException");
+        } catch (NumberFormatException e) {
+            System.err.println("Cought an NumberFormatException");
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.err.println("Cought an ArrayIndexOutOfBoundsException");
+        } catch (StringIndexOutOfBoundsException e) {
+            System.err.println("Cought an StringIndexOutOfBoundsException");
         }
     }
 
@@ -86,5 +96,6 @@ public class Main { // Shayan + Jesper
         TollFeeCalculator("src\\Test1.txt");
         TollFeeCalculator("src\\Test2.txt");
         TollFeeCalculator("src\\Test3.txt");
+        TollFeeCalculator("src\\Test4.txt");
     }
 }
