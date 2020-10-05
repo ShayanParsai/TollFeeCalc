@@ -43,15 +43,16 @@ public class Main { // Shayan + Jesper
         int totalDayFee = 0;
         int lastValue = 0;
         int currentValue;
+        boolean isNewDay;
         LocalDateTime intervalStart = dates[0];
 
         for(LocalDateTime date: dates) {
             long diffInMinutes = intervalStart.until(date, ChronoUnit.MINUTES);
-            long diffInDays = intervalStart.until(date, ChronoUnit.HALF_DAYS);
+            isNewDay = intervalStart.getDayOfYear() != date.getDayOfYear();
             System.out.println(date.toString());
             if (getTollFeePerPassing(date) == 0) {
                 System.out.println("Free Hour/Day/Month");
-            }else if (diffInDays > 0 ) {
+            }else if (isNewDay) {
                 intervalStart = date;
                 System.out.println("This is a new day, the current totalDayFee is: "+ totalDayFee);
                 totalFee += Math.min(60,totalDayFee);
@@ -78,8 +79,7 @@ public class Main { // Shayan + Jesper
                     System.out.println("One of the last passages within one hour was charged insted");
                     System.out.println("This passage was free");
                 }
-            }
-            System.out.println(" ");
+            } System.out.println(" ");
         }
         totalFee += Math.min(60,totalDayFee);
         return totalFee;
