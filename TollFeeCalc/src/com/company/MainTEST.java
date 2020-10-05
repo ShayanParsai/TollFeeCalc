@@ -6,8 +6,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Testing Calculator")
+@DisplayName("Testing Main")
 public class MainTEST {
+
+    @Test
+    @DisplayName("Testing exeptions")
+    void TollFeeCalculator () {
+
+        String expectedOutput = "The format of the strings in the file are wrong, please adjust them";
+        assertEquals(expectedOutput,Main.TollFeeCalculator("src\\TestForExeptions.txt"));
+    }
 
     @Test
     @DisplayName("Saturday,Sunday or July ? ")
@@ -129,6 +137,5 @@ public class MainTEST {
         assertEquals(Main.getTollFeePerPassing(date9),8);
         assertEquals(Main.getTollFeePerPassing(date10),0);
         assertEquals(Main.getTollFeePerPassing(date11),0);
-
     }
 }

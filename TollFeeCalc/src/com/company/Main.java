@@ -1,7 +1,7 @@
 package com.company;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,32 +10,44 @@ import java.util.Scanner;
 
 public class Main { // Shayan + Jesper
 
-    public static void TollFeeCalculator(String inputFile) {
+    public static String TollFeeCalculator(String inputFile) {
+        String errorMessage = "";
 
         try {
-            Scanner sc = new Scanner(new File(inputFile));
-            String[] dateStrings = sc.nextLine().split(", ");
-            LocalDateTime[] dates = new LocalDateTime[dateStrings.length];
-            for(int i = 0; i < dates.length; i++) {
-                dates[i] = LocalDateTime.parse(dateStrings[i], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            }
-            System.out.println("The total fee for the input file is: " + getTotalFeeCost(dates));
-            System.out.println("\n==============NEW FILE===============\n");
-        } catch (IOException e){
-            System.err.println("Cought an IOException");
-        } catch (ArithmeticException e) {
-            System.err.println("Cought an ArithmeticException");
+            TollFeeCalculator2(inputFile);
         } catch (NullPointerException e) {
             System.err.println("Cought an NullPointerException");
+            errorMessage = "Cought an NullPointerException";
         } catch (NumberFormatException e) {
             System.err.println("Cought an NumberFormatException");
+            errorMessage = "Cought an NumberFormatException";
         } catch (ArrayIndexOutOfBoundsException e){
             System.err.println("The Array is out of bounds, please adjust the lenght");
+            errorMessage = "The Array is out of bounds, please adjust the lenght";
         } catch (StringIndexOutOfBoundsException e) {
             System.err.println("Cought an StringIndexOutOfBoundsException");
+            errorMessage = "Cought an StringIndexOutOfBoundsException";
         } catch (DateTimeParseException e) {
-            System.err.println("The format of the input files are wrong, please adjust the format");
+            System.err.println("The format of the strings in the file are wrong, please adjust them");
+            errorMessage = "The format of the strings in the file are wrong, please adjust them";
+        } catch (FileNotFoundException e) {
+            System.err.println("That file cannot be found");
+            errorMessage = "That file cannot be found";
         }
+        return errorMessage;
+    }
+
+    private static void TollFeeCalculator2(String inputFile) throws FileNotFoundException, DateTimeParseException,
+    ArrayIndexOutOfBoundsException, NullPointerException, NumberFormatException, StringIndexOutOfBoundsException{
+
+        Scanner sc = new Scanner(new File(inputFile));
+        String[] dateStrings = sc.nextLine().split(", ");
+        LocalDateTime[] dates = new LocalDateTime[dateStrings.length];
+        for(int i = 0; i < dates.length; i++) {
+            dates[i] = LocalDateTime.parse(dateStrings[i], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        }
+        System.out.println("The total fee for the input file is: " + getTotalFeeCost(dates));
+        System.out.println("\n==============NEW FILE===============\n");
     }
 
     public static int getTotalFeeCost(LocalDateTime[] dates) {
@@ -111,5 +123,6 @@ public class Main { // Shayan + Jesper
         TollFeeCalculator("src\\Test2.txt");
         TollFeeCalculator("src\\Test3.txt");
         TollFeeCalculator("src\\Test4.txt");
+        TollFeeCalculator("src\\TestForExeptions.txt");
     }
 }
