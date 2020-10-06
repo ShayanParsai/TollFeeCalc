@@ -15,12 +15,6 @@ public class Main { // Shayan + Jesper
 
         try {
             TollFeeCalculator2(inputFile);
-        } catch (NumberFormatException e) {
-            System.err.println("Cought an NumberFormatException");
-            errorMessage = "Cought an NumberFormatException";
-        } catch (ArrayIndexOutOfBoundsException e){
-            System.err.println("The Array is out of bounds, please adjust the lenght");
-            errorMessage = "The Array is out of bounds, please adjust the lenght";
         } catch (DateTimeParseException e) {
             System.err.println("The format of the strings in the file are wrong, please adjust them");
             errorMessage = "The format of the strings in the file are wrong, please adjust them";
@@ -31,8 +25,7 @@ public class Main { // Shayan + Jesper
         return errorMessage;
     }
 
-    private static void TollFeeCalculator2(String inputFile) throws FileNotFoundException, DateTimeParseException,
-    ArrayIndexOutOfBoundsException, NumberFormatException {
+    private static void TollFeeCalculator2(String inputFile) throws FileNotFoundException, DateTimeParseException {
 
         Scanner sc = new Scanner(new File(inputFile));
         String[] dateStrings = sc.nextLine().split(", ");
