@@ -13,8 +13,13 @@ public class MainTEST {
     @DisplayName("Testing exeptions")
     void TollFeeCalculator () {
 
-        String expectedOutput = "The format of the strings in the file are wrong, please adjust them";
-        assertEquals(expectedOutput,Main.TollFeeCalculator("src\\TestForExeptions.txt"));
+        //Testing DateTimeParseException
+        String expectedOutput1 = "The format of the strings in the file are wrong, please adjust them";
+        assertEquals(expectedOutput1,Main.TollFeeCalculator("src\\DateTimeParseExceptionTest.txt"));
+
+        //Testing FileNotFoundException
+        String expectedOutput2 = "That file cannot be found";
+        assertEquals(expectedOutput2,Main.TollFeeCalculator("src\\WrongFileName.txt"));
     }
 
     @Test

@@ -15,18 +15,12 @@ public class Main { // Shayan + Jesper
 
         try {
             TollFeeCalculator2(inputFile);
-        } catch (NullPointerException e) {
-            System.err.println("Cought an NullPointerException");
-            errorMessage = "Cought an NullPointerException";
         } catch (NumberFormatException e) {
             System.err.println("Cought an NumberFormatException");
             errorMessage = "Cought an NumberFormatException";
         } catch (ArrayIndexOutOfBoundsException e){
             System.err.println("The Array is out of bounds, please adjust the lenght");
             errorMessage = "The Array is out of bounds, please adjust the lenght";
-        } catch (StringIndexOutOfBoundsException e) {
-            System.err.println("Cought an StringIndexOutOfBoundsException");
-            errorMessage = "Cought an StringIndexOutOfBoundsException";
         } catch (DateTimeParseException e) {
             System.err.println("The format of the strings in the file are wrong, please adjust them");
             errorMessage = "The format of the strings in the file are wrong, please adjust them";
@@ -38,7 +32,7 @@ public class Main { // Shayan + Jesper
     }
 
     private static void TollFeeCalculator2(String inputFile) throws FileNotFoundException, DateTimeParseException,
-    ArrayIndexOutOfBoundsException, NullPointerException, NumberFormatException, StringIndexOutOfBoundsException{
+    ArrayIndexOutOfBoundsException, NumberFormatException {
 
         Scanner sc = new Scanner(new File(inputFile));
         String[] dateStrings = sc.nextLine().split(", ");
@@ -123,6 +117,5 @@ public class Main { // Shayan + Jesper
         TollFeeCalculator("src\\Test2.txt");
         TollFeeCalculator("src\\Test3.txt");
         TollFeeCalculator("src\\Test4.txt");
-        TollFeeCalculator("src\\TestForExeptions.txt");
     }
 }
