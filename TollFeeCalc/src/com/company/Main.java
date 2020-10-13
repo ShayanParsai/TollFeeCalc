@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main { // Shayan + Jesper
@@ -21,12 +22,15 @@ public class Main { // Shayan + Jesper
         } catch (FileNotFoundException e) {
             System.err.println("That file cannot be found");
             errorMessage = "That file cannot be found";
+        } catch (NoSuchElementException e) {
+            System.err.println("No elements can be found in that file");
+            errorMessage = "No elements can be found in that file";
         }
         return errorMessage;
     }
 
-    private static void TollFeeCalculator2(String inputFile) throws FileNotFoundException, DateTimeParseException {
-
+    private static void TollFeeCalculator2(String inputFile) throws FileNotFoundException, DateTimeParseException,
+                                                                                           NoSuchElementException{
         Scanner sc = new Scanner(new File(inputFile));
         String[] dateStrings = sc.nextLine().split(", ");
         LocalDateTime[] dates = new LocalDateTime[dateStrings.length];
@@ -109,6 +113,6 @@ public class Main { // Shayan + Jesper
         TollFeeCalculator("src\\Test1.txt");
         TollFeeCalculator("src\\Test2.txt");
         TollFeeCalculator("src\\Test3.txt");
-        TollFeeCalculator("src\\Test4.txt");
+        TollFeeCalculator("src\\NoSuchElement.txt");
     }
 }
